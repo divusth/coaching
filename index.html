@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA FIT | Elite Online Coaching Academy</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800;900&family=Montserrat:ital,wght@0,800;0,900;1,900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #06090e;
+            --bg-card: #0f1520;
+            --gold-primary: #f59e0b;
+            --gold-glow: #fbbf24;
+            --blue-navy: #1e3a8a;
+            --blue-electric: #3b82f6;
+            --text-white: #ffffff;
+            --text-gray: #94a3b8;
+            --border-gold: rgba(245, 158, 11, 0.3);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Alexandria', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 8%;
+            z-index: 1000;
+            background: rgba(6, 9, 14, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.15);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--text-white);
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .logo span {
+            color: var(--gold-primary);
+            text-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-gold);
+            color: var(--gold-glow);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .lang-btn:hover {
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--gold-primary), #d97706);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.6);
+        }
+
+        /* Live Ticker Banner */
+        .ticker-wrap {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(15, 21, 32, 0.95);
+            border-top: 1px solid var(--border-gold);
+            padding: 8px 0;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 40px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold-glow);
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Pages System */
+        .page-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        .page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+            padding-top: 90px;
+            padding-bottom: 60px;
+        }
+
+        .page.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            min-height: calc(100vh - 150px);
+            align-items: center;
+            padding: 0 8%;
+            gap: 40px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--gold-glow);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 800;
+            border: 1px solid var(--border-gold);
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 52px;
+            line-height: 1.15;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--gold-glow), #fef08a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: var(--text-gray);
+            line-height: 1.7;
+            margin-bottom: 35px;
+            max-width: 520px;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--gold-primary), #d97706);
+            color: var(--bg-dark);
+            border: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: 900;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.35);
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 0 40px rgba(245, 158, 11, 0.6);
+        }
+
+        /* Scarcity Banner */
+        .scarcity-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            padding: 10px 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #fca5a5;
+            font-weight: 700;
+        }
+
+        /* Interactive Before/After Slider */
+        .transformation-container {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            height: 520px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 2px solid var(--border-gold);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            margin: 0 auto;
+        }
+
+        .ba-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ba-after {
+            width: 50%;
+            overflow: hidden;
+            z-index: 2;
+            border-left: 2px solid var(--gold-primary);
+        }
+
+        .ba-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 10;
+            cursor: ew-resize;
+        }
+
+        .ba-label {
+            position: absolute;
+            bottom: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: var(--gold-glow);
+            padding: 6px 14px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            z-index: 3;
+            border: 1px solid var(--border-gold);
+        }
+
+        .label-before { right: 20px; }
+        .label-after { left: 20px; }
+
+        /* Calculator Section */
+        .calc-section {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 28px;
+            border: 1px solid var(--border-gold);
+            margin: 40px 8%;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .range-slider {
+            width: 100%;
+            margin: 15px 0;
+            accent-color: var(--gold-primary);
+        }
+
+        .calc-result-box {
+            background: rgba(6, 9, 14, 0.8);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .calc-number {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--gold-glow);
+            margin: 10px 0;
+        }
+
+        /* Programs Section */
+        .programs-section { padding: 40px 8% 80px; }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--border-gold);
+            color: var(--gold-glow);
+            padding: 10px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .back-btn:hover {
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+        }
+
+        .section-header { text-align: center; margin-bottom: 35px; }
+        .section-header h2 { font-size: 38px; font-weight: 900; margin-bottom: 10px; }
+        .section-header p { color: var(--text-gray); font-size: 15px; }
+
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-white);
+            padding: 10px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(135deg, var(--gold-primary), #d97706);
+            color: var(--bg-dark);
+            border-color: var(--gold-primary);
+        }
+
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: var(--bg-card);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .program-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2);
+        }
+
+        .program-img {
+            position: relative;
+            height: 220px;
+            width: 100%;
+        }
+
+        .program-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        .program-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(6, 9, 14, 0.9);
+            color: var(--gold-glow);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+            border: 1px solid var(--border-gold);
+        }
+
+        .program-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .program-title { font-size: 20px; font-weight: 900; margin-bottom: 10px; }
+        .program-desc { color: var(--text-gray); font-size: 13px; line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+
+        .program-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .price { font-size: 24px; font-weight: 900; color: var(--gold-glow); }
+
+        .book-btn {
+            background: transparent;
+            color: var(--gold-glow);
+            border: 1px solid var(--gold-primary);
+            padding: 12px;
+            border-radius: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .book-btn:hover {
+            background: var(--gold-primary);
+            color: var(--bg-dark);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+        .modal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 28px;
+            overflow: hidden;
+            transform: scale(0.8);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.active .modal-card { transform: scale(1); }
+
+        .modal-header {
+            padding: 22px;
+            background: rgba(245, 158, 11, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-white);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .modal-body { padding: 25px; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; color: var(--text-gray); margin-bottom: 6px; }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: #06090e;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-white);
+            outline: none;
+            font-size: 14px;
+        }
+
+        .whatsapp-submit {
+            width: 100%;
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-section { grid-template-columns: 1fr; text-align: center; }
+            .hero-desc { margin: 0 auto 30px; }
+            .hero-title { font-size: 36px; }
+            .calc-grid { grid-template-columns: 1fr; }
+            .transformation-container { height: 420px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <nav>
+        <a href="#" class="logo" onclick="switchPage('hero')">
+            AURA <span>FIT</span>
+        </a>
+        <div class="nav-right">
+            <button class="lang-btn" onclick="toggleLanguage()">
+                <i class="fa-solid fa-globe"></i> <span id="langText">FR</span>
+            </button>
+            <button class="nav-btn" onclick="switchPage('programs')">
+                <i class="fa-solid fa-bolt"></i> <span id="navBtnText">البرامج والاشتراكات</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Pages Container -->
+    <div class="page-container">
+        
+        <!-- PAGE 1: HERO -->
+        <section id="hero" class="page active">
+            <div class="hero-section">
+                <div>
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-fire"></i> <span id="heroBadge">أكاديمية التدريب الشخصي والرياضي 100%</span>
+                    </div>
+                    <h1 class="hero-title" id="heroTitle">
+                        حولة جسمك <span>لأفضل نسخة</span> في 60 يوماً
+                    </h1>
+                    <p class="hero-desc" id="heroDesc">
+                        انضم للبرنامج الأسرع تحقيقاً للنتائج! برامج متكاملة (تغذية، كمال أجسام، وكروس فيت) مع متابعة شخصية مستمرة وتعديل أسبوعي للخطط.
+                    </p>
+                    <button class="cta-btn" onclick="switchPage('programs')">
+                        <span id="ctaBtnText">اختر برنامجك وابدأ التحدي</span> <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                    <div class="scarcity-box">
+                        <i class="fa-solid fa-clock"></i> <span id="scarcityText">متبقي 3 أماكن فقط لمتابعة هذا الشهر!</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Before/After Transformation Slider -->
+                <div>
+                    <p style="text-align: center; font-size: 13px; color: var(--gold-glow); margin-bottom: 10px; font-weight: 700;">
+                        <i class="fa-solid fa-arrows-left-right"></i> <span id="sliderHint">اسحب المقبض لرؤية النتيجة الحقيقية</span>
+                    </p>
+                    <div class="transformation-container">
+                        <!-- Before Image -->
+                        <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1000&auto=format&fit=crop" class="ba-img" alt="Before">
+                        <span class="ba-label label-before" id="lblBefore">قبل (98 كغ)</span>
+                        
+                        <!-- After Image -->
+                        <div class="ba-img ba-after" id="afterBox">
+                            <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1000&auto=format&fit=crop" class="ba-img" style="width: 420px; max-width: none;" alt="After">
+                            <span class="ba-label label-after" id="lblAfter">بعد (78 كغ)</span>
+                        </div>
+
+                        <input type="range" min="0" max="100" value="50" class="ba-slider" id="baSlider" oninput="moveSlider(this.value)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Fitness Quiz / Calculator -->
+            <div class="calc-section">
+                <h3 style="text-align: center; margin-bottom: 20px; font-size: 24px;" id="calcTitle">📊 حاسبة هدفك والسعرات الحرارية</h3>
+                <div class="calc-grid">
+                    <div>
+                        <label style="font-size: 14px; font-weight: 700;" id="calcWeightLbl">وزنك الحالي (كغ): <span id="weightVal" style="color: var(--gold-glow);">80</span> كغ</label>
+                        <input type="range" min="40" max="150" value="80" class="range-slider" oninput="updateCalc(this.value)">
+                        
+                        <label style="font-size: 14px; font-weight: 700; margin-top: 15px; display: block;" id="calcGoalLbl">هدفك الرئيسي:</label>
+                        <select id="goalSelect" onchange="updateCalc()" style="width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-gold); color: white; border-radius: 12px; margin-top: 8px;">
+                            <option value="cut" id="optCut">خسارة دهون وتنشيف (Fat Loss)</option>
+                            <option value="bulk" id="optBulk">بناء عضل وتضخيم (Muscle Gain)</option>
+                            <option value="fit" id="optFit">لياقة بدنية وكروس فيت (CrossFit Fitness)</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <p style="font-size: 14px; color: var(--text-gray);" id="calcResTitle">احتياجك التقديري من السعرات:</p>
+                        <div class="calc-number"><span id="calVal">2,100</span> kcal/Day</div>
+                        <p style="font-size: 13px; color: var(--gold-glow);" id="calcRecText">البرنامج الموصى به: تحدي الكروس فيت والتنشيف</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: PROGRAMS -->
+        <section id="programs" class="page">
+            <div class="programs-section">
+                <button class="back-btn" onclick="switchPage('hero')">
+                    <i class="fa-solid fa-arrow-right"></i> <span id="backBtnText">العودة للرئيسية</span>
+                </button>
+
+                <div class="section-header">
+                    <h2 id="sectionTitle">اختر البرنامج المناسب لتغيير جسمك</h2>
+                    <p id="sectionSub">برامج متخصصة ومصممة علمياً لكافة الأهداف والمستويات</p>
+                </div>
+
+                <div class="filter-bar">
+                    <button class="filter-btn active" onclick="filterPrograms('all', event)" id="filterAll">الكل</button>
+                    <button class="filter-btn" onclick="filterPrograms('nutrition', event)" id="filterNut">🥗 التغذية والنظام الغذائي</button>
+                    <button class="filter-btn" onclick="filterPrograms('gym', event)" id="filterGym">🏋️ كمال الأجسام والجيم</button>
+                    <button class="filter-btn" onclick="filterPrograms('crossfit', event)" id="filterCross">⚡ الكروس فيت واللياقة</button>
+                </div>
+
+                <div class="programs-grid">
+                    
+                    <!-- Program 1 -->
+                    <div class="program-card" data-category="nutrition">
+                        <div class="program-img">
+                            <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=600&auto=format&fit=crop" alt="Nutrition Plan">
+                            <span class="program-tag ptag-1">نظام غذائي 🥗</span>
+                        </div>
+                        <div class="program-body">
+                            <h3 class="program-title ptitle-1">برنامج التغذية وتعديل السلوك الغذائي</h3>
+                            <p class="program-desc pdesc-1">جدول غذائي بحساب الماكروز والسعرات مخصص لجسمك، أكلات لذيذة بدون حرمان مع متابعة الوزن أسبوعياً.</p>
+                            <div class="program-meta">
+                                <span class="price">6,000 د.ج</span>
+                                <span style="font-size: 13px; color: var(--text-gray);">/ 8 أسابيع</span>
+                            </div>
+                            <button class="book-btn pbook-1" onclick="openModal('برنامج التغذية وتعديل السلوك الغذائي', '6,000 د.ج')">
+                                <i class="fa-brands fa-whatsapp"></i> حجز الاشتراك
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Program 2 -->
+                    <div class="program-card" data-category="gym">
+                        <div class="program-img">
+                            <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=600&auto=format&fit=crop" alt="Gym Building">
+                            <span class="program-tag ptag-2">كمال أجسام 🏋️</span>
+                        </div>
+                        <div class="program-body">
+                            <h3 class="program-title ptitle-2">برنامج كمال الأجسام والتضخيم الصافي</h3>
+                            <p class="program-desc pdesc-2">جدول تمارين جيم واستهداف الألياف العضلية مع مقاطع فيديو لشرح التكنيك الصحيح وتفادي الإصابات.</p>
+                            <div class="program-meta">
+                                <span class="price">9,000 د.ج</span>
+                                <span style="font-size: 13px; color: var(--text-gray);">/ 12 أسبوع</span>
+                            </div>
+                            <button class="book-btn pbook-2" onclick="openModal('برنامج كمال الأجسام والتضخيم الصافي', '9,000 د.ج')">
+                                <i class="fa-brands fa-whatsapp"></i> حجز الاشتراك
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Program 3 -->
+                    <div class="program-card" data-category="crossfit">
+                        <div class="program-img">
+                            <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=600&auto=format&fit=crop" alt="Crossfit">
+                            <span class="program-tag ptag-3">كروس فيت ⚡</span>
+                        </div>
+                        <div class="program-body">
+                            <h3 class="program-title ptitle-3">تحدي الكروس فيت وحرق الدهون</h3>
+                            <p class="program-desc pdesc-3">تمارين عالية الشدة (HIIT) لرفع اللياقة البدنية، زيادة التحمل، وحرق الدهون العنيدة بسرعة فائقة.</p>
+                            <div class="program-meta">
+                                <span class="price">8,000 د.ج</span>
+                                <span style="font-size: 13px; color: var(--text-gray);">/ 8 أسابيع</span>
+                            </div>
+                            <button class="book-btn pbook-3" onclick="openModal('تحدي الكروس فيت وحرق الدهون', '8,000 د.ج')">
+                                <i class="fa-brands fa-whatsapp"></i> حجز الاشتراك
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Live Ticker Bar -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <div class="ticker-item"><i class="fa-solid fa-fire"></i> <span id="t1">انضم ياسين للتو لبرنامج التضخيم</span></div>
+            <div class="ticker-item"><i class="fa-solid fa-trophy"></i> <span id="t2">خسارة 12 كغ للمتدربة سارة في 8 أسابيع</span></div>
+            <div class="ticker-item"><i class="fa-solid fa-bolt"></i> <span id="t3">نسبة الالتزام بالتمارين هذا الأسبوع 97%</span></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <button class="close-btn" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="modalTitle" style="color: var(--gold-glow);">تأكيد الحجز</h3>
+                <p id="modalPrice" style="font-size: 14px; color: var(--text-gray); margin-top: 4px;"></p>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="sendWhatsApp(event)">
+                    <div class="form-group">
+                        <label id="lbl1">الاسم واللقب:</label>
+                        <input type="text" id="clientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="lbl2">الوزن والعمر:</label>
+                        <input type="text" id="clientStats" required>
+                    </div>
+                    <div class="form-group">
+                        <label id="lbl3">مكان التمرين:</label>
+                        <select id="workoutPlace">
+                            <option value="Gym" id="optGym">القاعة الرياضية (Gym)</option>
+                            <option value="Home" id="optHome">المنزل (Home)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="whatsapp-submit">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i> <span id="modalSub">تأكيد عبر الواتساب</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Logic -->
+    <script>
+        const COACH_WHATSAPP = "213600000000"; // قم بتعديل الرقم
+        let currentLang = 'AR';
+        let selectedProg = '';
+        let selectedPrice = '';
+
+        const translations = {
+            AR: {
+                navBtnText: "البرامج والاشتراكات", heroBadge: "أكاديمية التدريب الشخصي والرياضي 100%", heroTitle: 'حولة جسمك <span>لأفضل نسخة</span> في 60 يوماً', heroDesc: "انضم للبرنامج الأسرع تحقيقاً للنتائج! برامج متكاملة (تغذية، كمال أجسام، وكروس فيت) مع متابعة شخصية مستمرة وتعديل أسبوعي للخطط.", ctaBtnText: "اختر برنامجك وابدأ التحدي", scarcityText: "متبقي 3 أماكن فقط لمتابعة هذا الشهر!", sliderHint: "اسحب المقبض لرؤية النتيجة الحقيقية", lblBefore: "قبل (98 كغ)", lblAfter: "بعد (78 كغ)", calcTitle: "📊 حاسبة هدفك والسعرات الحرارية", calcWeightLbl: "وزنك الحالي (كغ):", calcGoalLbl: "هدفك الرئيسي:", optCut: "خسارة دهون وتنشيف (Fat Loss)", optBulk: "بناء عضل وتضخيم (Muscle Gain)", optFit: "لياقة بدنية وكروس فيت (CrossFit Fitness)", calcResTitle: "احتياجك التقديري من السعرات:", backBtnText: "العودة للرئيسية", sectionTitle: "اختر البرنامج المناسب لتغيير جسمك", sectionSub: "برامج متخصصة ومصممة علمياً لكافة الأهداف والمستويات", filterAll: "الكل", filterNut: "🥗 التغذية والنظام الغذائي", filterGym: "🏋️ كمال الأجسام والجيم", filterCross: "⚡ الكروس فيت واللياقة", ptag1: "نظام غذائي 🥗", ptitle1: "برنامج التغذية وتعديل السلوك الغذائي", pdesc1: "جدول غذائي بحساب الماكروز والسعرات مخصص لجسمك، أكلات لذيذة بدون حرمان مع متابعة الوزن أسبوعياً.", pbook1: "حجز الاشتراك", ptag2: "كمال أجسام 🏋️", ptitle2: "برنامج كمال الأجسام والتضخيم الصافي", pdesc2: "جدول تمارين جيم واستهداف الألياف العضلية مع مقاطع فيديو لشرح التكنيك الصحيح وتفادي الإصابات.", pbook2: "حجز الاشتراك", ptag3: "كروس فيت ⚡", ptitle3: "تحدي الكروس فيت وحرق الدهون", pdesc3: "تمارين عالية الشدة (HIIT) لرفع اللياقة البدنية، زيادة التحمل، وحرق الدهون العنيدة بسرعة فائقة.", pbook3: "حجز الاشتراك", modalTitle: "تأكيد الحجز", lbl1: "الاسم واللقب:", lbl2: "الوزن والعمر:", lbl3: "مكان التمرين:", optGym: "القاعة الرياضية (Gym)", optHome: "المنزل (Home)", modalSub: "تأكيد عبر الواتساب", t1: "انضم ياسين للتو لبرنامج التضخيم", t2: "خسارة 12 كغ للمتدربة سارة في 8 أسابيع", t3: "نسبة الالتزام بالتمارين هذا الأسبوع 97%"
+            },
+            FR: {
+                navBtnText: "Programmes & Tarifs", heroBadge: "ACADÉMIE DE COACHING ÉLITE 100% EN LIGNE", heroTitle: 'Transformez Votre Corps en <span>60 Jours</span>', heroDesc: "Rejoignez le programme le plus rapide pour obtenir des résultats! Programmes complets (Nutrition, Musculation, CrossFit) avec suivi quotidien.", ctaBtnText: "Choisir un Programme", scarcityText: "Plus que 3 places disponibles ce mois-ci!", sliderHint: "Glissez le curseur pour voir le résultat", lblBefore: "Avant (98kg)", lblAfter: "Après (78kg)", calcTitle: "📊 Calculateur de Calories & Objectif", calcWeightLbl: "Votre Poids Actuel (kg):", calcGoalLbl: "Votre Objectif:", optCut: "Perte de Gras (Sèche)", optBulk: "Prise de Muscle (Prise de masse)", optFit: "Condition Physique & CrossFit", calcResTitle: "Besoins Caloriques Estimés:", backBtnText: "Retour à l'accueil", sectionTitle: "Choisissez Votre Programme", sectionSub: "Des programmes conçus scientifiquement pour tous les objectifs", filterAll: "Tous", filterNut: "🥗 Nutrition & Diète", filterGym: "🏋️ Musculation & Gym", filterCross: "⚡ CrossFit & Fitness", ptag1: "Nutrition 🥗", ptitle1: "Programme Nutrition & Diététique", pdesc1: "Plan alimentaire calculé en macros & calories, adapté à vos goûts sans privation avec suivi de poids.", pbook1: "Réserver via WhatsApp", ptag2: "Bodybuilding 🏋️", ptitle2: "Programme Musculation & Prise de Masse", pdesc2: "Entraînement ciblé en salle avec vidéos démonstratives des mouvements pour maximiser l'hypertrophie.", pbook2: "Réserver via WhatsApp", ptag3: "CrossFit ⚡", ptitle3: "Challenge CrossFit & Sèche Extrême", pdesc3: "Entraînements intensifs (HIIT) pour brûler les graisses rapidement et développer une condition physique d'élite.", pbook3: "Réserver via WhatsApp", modalTitle: "Confirmation de Réservation", lbl1: "Nom & Prénom:", lbl2: "Poids & Âge:", lbl3: "Lieu d'entraînement:", optGym: "Salle de sport (Gym)", optHome: "Maison (Home)", modalSub: "Confirmer sur WhatsApp", t1: "Yassine vient de rejoindre le programme Bulk", t2: "-12kg pour Sarah en 8 semaines", t3: "Taux d'engagement de la semaine: 97%"
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'AR' ? 'FR' : 'AR';
+            document.getElementById('langText').innerText = currentLang === 'AR' ? 'FR' : 'AR';
+            document.documentElement.dir = currentLang === 'AR' ? 'rtl' : 'ltr';
+
+            const t = translations[currentLang];
+            document.getElementById('navBtnText').innerText = t.navBtnText;
+            document.getElementById('heroBadge').innerText = t.heroBadge;
+            document.getElementById('heroTitle').innerHTML = t.heroTitle;
+            document.getElementById('heroDesc').innerText = t.heroDesc;
+            document.getElementById('ctaBtnText').innerText = t.ctaBtnText;
+            document.getElementById('scarcityText').innerText = t.scarcityText;
+            document.getElementById('sliderHint').innerText = t.sliderHint;
+            document.getElementById('lblBefore').innerText = t.lblBefore;
+            document.getElementById('lblAfter').innerText = t.lblAfter;
+            document.getElementById('calcTitle').innerText = t.calcTitle;
+            document.getElementById('calcGoalLbl').innerText = t.calcGoalLbl;
+            document.getElementById('optCut').innerText = t.optCut;
+            document.getElementById('optBulk').innerText = t.optBulk;
+            document.getElementById('optFit').innerText = t.optFit;
+            document.getElementById('calcResTitle').innerText = t.calcResTitle;
+            document.getElementById('backBtnText').innerText = t.backBtnText;
+            document.getElementById('sectionTitle').innerText = t.sectionTitle;
+            document.getElementById('sectionSub').innerText = t.sectionSub;
+            document.getElementById('filterAll').innerText = t.filterAll;
+            document.getElementById('filterNut').innerText = t.filterNut;
+            document.getElementById('filterGym').innerText = t.filterGym;
+            document.getElementById('filterCross').innerText = t.filterCross;
+
+            document.querySelector('.ptag-1').innerText = t.ptag1;
+            document.querySelector('.ptitle-1').innerText = t.ptitle1;
+            document.querySelector('.pdesc-1').innerText = t.pdesc1;
+            document.querySelector('.pbook-1').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${t.pbook1}`;
+
+            document.querySelector('.ptag-2').innerText = t.ptag2;
+            document.querySelector('.ptitle-2').innerText = t.ptitle2;
+            document.querySelector('.pdesc-2').innerText = t.pdesc2;
+            document.querySelector('.pbook-2').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${t.pbook2}`;
+
+            document.querySelector('.ptag-3').innerText = t.ptag3;
+            document.querySelector('.ptitle-3').innerText = t.ptitle3;
+            document.querySelector('.pdesc-3').innerText = t.pdesc3;
+            document.querySelector('.pbook-3').innerHTML = `<i class="fa-brands fa-whatsapp"></i> ${t.pbook3}`;
+
+            document.getElementById('modalTitle').innerText = t.modalTitle;
+            document.getElementById('lbl1').innerText = t.lbl1;
+            document.getElementById('lbl2').innerText = t.lbl2;
+            document.getElementById('lbl3').innerText = t.lbl3;
+            document.getElementById('optGym').innerText = t.optGym;
+            document.getElementById('optHome').innerText = t.optHome;
+            document.getElementById('modalSub').innerText = t.modalSub;
+
+            document.getElementById('t1').innerText = t.t1;
+            document.getElementById('t2').innerText = t.t2;
+            document.getElementById('t3').innerText = t.t3;
+
+            updateCalc();
+        }
+
+        function moveSlider(val) {
+            document.getElementById('afterBox').style.width = val + '%';
+        }
+
+        function updateCalc(val) {
+            if(val) document.getElementById('weightVal').innerText = val;
+            const weight = parseInt(document.getElementById('weightVal').innerText);
+            const goal = document.getElementById('goalSelect').value;
+
+            let calories = weight * 25;
+            let recText = "";
+
+            if(goal === 'cut') {
+                calories -= 400;
+                recText = currentLang === 'AR' ? "الموصى به: تحدي التنشيف والكروس فيت" : "Recommandé: Challenge Sèche & CrossFit";
+            } else if(goal === 'bulk') {
+                calories += 400;
+                recText = currentLang === 'AR' ? "الموصى به: برنامج كمال الأجسام والتضخيم" : "Recommandé: Programme Prise de Masse";
+            } else {
+                recText = currentLang === 'AR' ? "الموصى به: برنامج التغذية واللياقة البدنية" : "Recommandé: Programme Nutrition & Fitness";
+            }
+
+            document.getElementById('calVal').innerText = calories.toLocaleString();
+            document.getElementById('calcRecText').innerText = recText;
+        }
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function filterPrograms(cat, event) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.program-card').forEach(card => {
+                if (cat === 'all' || card.dataset.category === cat) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(title, price) {
+            selectedProg = title;
+            selectedPrice = price;
+            document.getElementById('modalPrice').innerText = "السعر / Prix: " + price;
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        function sendWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const stats = document.getElementById('clientStats').value;
+            const place = document.getElementById('workoutPlace').value;
+
+            const text = `AURA FIT Booking / حجز جديد%0A%0A💪 *Program:* ${selectedProg}%0A💰 *Price:* ${selectedPrice}%0A👤 *Name:* ${name}%0A📊 *Stats:* ${stats}%0A🏋️ *Place:* ${place}`;
+            window.open(`https://wa.me/${COACH_WHATSAPP}?text=${text}`, '_blank');
+            closeModal();
+        }
+    </script>
+</body>
+</html>
